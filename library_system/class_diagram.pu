@@ -1,0 +1,67 @@
+@startuml
+title class_diagram
+
+package pack <<Rectangle>> {
+    class LibrarySystem 
+    class Book 
+    class User
+    class UserManager
+    class History
+}
+
+class LibrarySystem {
+    -List<Book> shelf
+    -UserManager manager
+    -Map<Book, List<History>> historyMap
+    --
+    +LibrarySystem()
+    ~void run()
+    ~void printWelcomeMessage()
+    ~Book createBook()
+    ~void list()
+    ~void printBook()
+    ~void printHistoryList()
+    ~void addBooks()
+    ~void resisterUsers()
+    ~History createHistory()
+    ~Boolean resisterHistory()
+    ~Boolean canLend()
+    ~History lend()
+    ~void runLend()
+    ~List<History> findHistory()
+    ~void runFindHistory()
+}
+class Book {
+    ~String title
+    ~String authors
+    ~String publisher
+    ~Integer publishYear
+}
+class User {
+    ~String name
+    ~String gender
+    ~Integer age
+}
+class UserManager {
+    ~List<User> users
+    --
+    ~User create()
+    ~void add()
+}
+class History {
+    ~Date lendDate
+    ~Date returnDate
+    ~Book book
+    ~User user
+    --
+    ~Boolean isLend()
+}
+
+Book "0..*"->"1" LibrarySystem
+LibrarySystem "1"<-"1" UserManager
+UserManager "1"<-"0..*" User
+History "0..*"-up-->"1" LibrarySystem
+Book "1"->"1" History
+User "0..*"->"1" History
+
+@enduml

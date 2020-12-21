@@ -1,0 +1,6 @@
+MainJFrame main()
+ MainJFrame() JFrame作成
+ (MainJFrame)init() 背景, 
+  getBounds() パネル作成：640 * 480
+  
+ 

@@ -1,0 +1,104 @@
+@startuml
+title a shooting game
+
+package pack9 <<Rectangle>> {
+    class JFrame
+    interface ActionListener
+    class MainFrame
+    class JPanel
+    interface Runnable
+    class MyPanel
+    class ShootingGame
+    abstract class GameObject
+    class Ship
+    class Bullets
+    class Enemies
+    class BossEnemy
+    class BossBullets
+    class Stars
+    class MyMouseAdapter
+    class MyMouseMotionListener
+}
+
+class MainFrame {
+    ~MyPanel canvas
+    ~ShootingGame shoot
+    ~Button bottom
+    --
+    ~MainFrame()
+    +void init()
+    +void actionPerformed()
+    +void main()
+}
+
+class MyPanel {
+    ~Thread th
+    ~Image buffer
+    ~Graphics bufferg
+    ~boolean waitFlag
+    ~ShootingGame shoot
+    --
+    +Mycanvas()
+    +void start()
+    +void run()
+    +void update()
+    +void paint()
+}
+
+class ShootingGame {
+    +int panelWidth
+    +int panelHeight
+    +int speed
+    +int deathNum
+    +boolean bossExist
+    ~Ship ship
+    ~Enemies enemies
+    ~Bullet bullet
+    ~BossEnemy boss
+    ~BossBullets bossBullet
+    ~Stars stars
+    -boolean outFlag
+    -int timeInc
+    -int timeIncBoss
+    --
+    +void init()
+    +Image getImage()
+    +void run()
+    +void draw()
+    +void collisions()
+    ..
+    +void bulletsEnemies()
+    +void bulletsShip()
+    +void enemiesShip()
+    +void shipBoss()
+    +void bulletsBoss()
+    ..
+    +void mouseDragged()
+    +void mouseMoved()
+    +void mouseEnterd()
+    +void mouseExited()
+    +void mousePressed()
+}
+
+JFrame -up--|> MainFrame
+ActionListener -up--> MainFrame
+MainFrame -right--> MyPanel : canvas.init() >
+JPanel -down--|> MyPanel
+Runnable -up--> MyPanel
+MyPanel -right--> ShootingGame : shoot.run() >
+GameObject --> Ship
+GameObject --> Bullets
+GameObject --> Enemies
+GameObject --> BossEnemy
+GameObject --> BossBullets
+GameObject --> Stars
+Ship --* ShootingGame
+Enemies --* ShootingGame
+Bullets --* ShootingGame
+BossEnemy --* ShootingGame
+BossBullets --* ShootingGame
+Stars --* ShootingGame
+MyMouseMotionListener -up--> ShootingGame
+MyMouseAdapter -up--> ShootingGame
+
+@enduml

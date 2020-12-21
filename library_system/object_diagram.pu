@@ -1,0 +1,39 @@
+@startuml
+title object_diagram
+
+object "historyMap: LibrarySystem" as historyMap
+historyMap : type = HashMap<Book, List<History>>
+
+object "book: LibraryUtil" as book
+book : type = Book
+object "histories: LibrarySystem" as histories
+histories : type = List<history>
+
+object "shelf: LibrarySystem" as shelf
+shelf : type = List<Book>
+
+object "book: LibrarySystem" as book_history
+book_history : type = Book
+
+object "manager: LibrarySystem" as manager
+manager : type = UserManager
+
+object "user: UserManager" as user
+user : type = User
+
+object "users: UserManager" as users
+users : type = List<User>
+
+
+
+historyMap -- book
+historyMap -- histories
+
+book_history -- shelf
+book -- shelf
+histories .. manager
+manager o-- user
+user -- users
+histories -- book_history
+
+@enduml

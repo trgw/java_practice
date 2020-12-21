@@ -1,0 +1,5 @@
+MainJFrame main()
+ MainJFrame() JFrame作成
+ (MainJFrame)init() 背景, 
+  
+ 
